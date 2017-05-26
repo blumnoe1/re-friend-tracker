@@ -22,7 +22,7 @@
     "url": "https://github.com/innovad/path-example.git"
   },
   "engines": {
-    "node": "6.10.3",
+    "node": "v6.10.3",
     "npm": "3.10.10"
   },
   "scripts": {
