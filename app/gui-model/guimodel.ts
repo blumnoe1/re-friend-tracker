@@ -1,8 +1,8 @@
-export class GuiModel {
+﻿export class GuiModel {
 
     private _guiModel = {
         "application": {
-            "title": "Requirements Engineering Friend Tracker",
+            "title": "Noëls Friend Tracker",
             "formList": [
                 {
                     "id": "FriendForm",
@@ -21,6 +21,21 @@ export class GuiModel {
                             "name": "FirstName",
                             "width": 1,
                             "required": true
+                        },
+			{ 
+			    "id": "nickname",
+			    "type": "text",
+			    "name": "Nickname",
+		            "width": 2,
+			    "required": true
+			},
+			{
+                            "id":   "group",
+                            "type": "autocomplete",
+                            "name": "Group",
+                            "data": [ "Study", "Family","School"],
+                            "form": "GroupForm",
+                            "width": 2
                         },
                         {
                             "id":   "location",
@@ -82,7 +97,105 @@ export class GuiModel {
                             "name": "Ok"
                         }
                     ]
-                }
+                },
+		{
+                    "id": "GroupForm",
+                    "title": "Group",
+                    "formFieldList": [
+                        {
+                            "id": "name",
+                            "type": "text",
+                            "name": "GroupName",
+                            "width": 2,
+                            "required": true
+                        },
+			{
+                            "id": "Creationdate",
+                            "type": "date",
+                            "name": "Creation Date",
+                            "width": 1,
+                            "required": true
+			},
+			{
+                            "id": "comment",
+                            "type": "text",
+                            "name": "Comments",
+                            "width": 2,
+                            "height": 4,
+                            "maxLength": 5000,
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
+		{
+                    "id": "ActivityForm",
+                    "title": "Activity",
+                    "formFieldList": [
+                        {
+                            "id": "Name",
+                            "type": "text",
+                            "name": "Name",
+                            "width": 1,
+                            "required": true
+                        },
+                        {
+                            "id": "Date",
+                            "type": "date",
+                            "name": "Date",
+                            "width": 1,
+                            "required": true
+			},
+                        {
+                            "id":   "location",
+                            "type": "autocomplete",
+                            "name": "Location",
+                            "data": [ "Winterthur", "Zürich" ],
+                            "form": "GroupForm",
+                            "width": 2,
+			    "required": true
+                        },
+			{
+                            "id":   "Participants",
+                            "type": "autocomplete",
+                            "name": "Participants",
+                            "data": [ "Anton", "Emilia","Peter"],
+                            "form": "GroupForm",
+                            "width": 2
+			    "required": true
+                        },
+                        {
+                            "id": "comment",
+                            "type": "text",
+                            "name": "Comments",
+                            "width": 2,
+                            "height": 4,
+                            "maxLength": 5000,
+                        },
+                        {
+                            "type": "deleteButton",
+                            "name": "Delete"
+                        },
+                        {
+                            "type": "cancelButton",
+                            "name": "Cancel"
+                        },
+                        {
+                            "type": "okButton",
+                            "name": "Ok"
+                        }
+                    ]
+                },
             ],
             "pageList": [
                 {
@@ -103,6 +216,13 @@ export class GuiModel {
                             "color": "yellow",
                             "page": "locationspage",
                         },
+			{
+			    "type": "button",
+			    "name": "Groups",
+			    "icon": "fa-weixin",
+			    "color": "wisteria",
+			    "page": "groupspage",
+			},
                     ]
                 },
                 {
@@ -120,14 +240,60 @@ export class GuiModel {
                                 "form": "FriendForm"
                             }
                         },
+			{
+			    "type": "button",
+			    "name": "Search",
+			    "icon": "fa-search",
+			    "color": "blue",
+			},
                         {
-                            "type": "list",
+			    "type": "button",
+			    "name": "Anton Amacker",
+			    "icon": "fa-male",
+			    "color": "blue",
+			    "page": "friendmanagepage",
+			},
+			{
+			    "type": "button",
+			    "name": "Britta Beavers",
+			    "icon": "fa-female",
+			    "color": "blue",
+			    "page": "friendmanagepage",
+			},
+                    ]
+                },
+                {
+                    "id": "friendmanagepage",
+                    "elementList": [
+                        {
+                            "type": "backbutton",
+                        },
+                        {
+                            "type": "newButton",
+                            "name": "Edit Friend",
                             "icon": "fa-user",
-                            "color": "blue",
-                            "search": true,
-                            "data": [ { name: "Anton Amacker" }, { name: "Britta Beavers"} ],
+                            "color": "green",
                             "form": {
                                 "form": "FriendForm"
+                            }
+                        },
+			{
+                            "type": "newButton",
+                            "name": "Ad Activity",
+                            "icon": "fa-calendar",
+                            "color": "red",
+                            "form": {
+                                "form": "ActivityForm"
+                            }
+                        },
+                        {
+                            "type": "list",
+                            "icon": "fa-calendar",
+                            "color": "red",
+                            "search": true,
+                            "data": [ { name: "Movie Why Him" }, { name: "Sports Tennis"}, { name: "Eating Pizza"} ],
+                            "form": {
+                                "form": "ActivityForm"
                             }
                         },
                     ]
@@ -158,7 +324,34 @@ export class GuiModel {
                             }
                         },
                     ]
-                }
+                },
+		{ 
+		    "id": "groupspage",
+		    "elementList": [ 
+			{
+			    "type": "backbutton",
+		},
+		{
+			    "type": "newButton",
+			    "name": "NewGroup",
+			    "icon": "fa-weixin",
+			    "color": "green",
+			    "form": {
+			        "form": "GroupForm"
+			    }
+			},
+		{
+			    "type": "list",
+			    "icon": "fa-weixin",
+			    "color": "wisteria",
+			    "search": true,
+			    "data":[{name:"Study"},{name"Family"},{name"School"}],
+			    "form": {
+			        "form": "GroupForm"
+			    }
+			},
+		    ]
+		}
             ]
         }
     };
